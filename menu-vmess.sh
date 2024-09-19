@@ -358,7 +358,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
         echo " Select the existing client to view the config"
         echo " Press CTRL+C to return"
 		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-        echo "  User       Expired  " 
+        echo " User          Expired  " 
         #grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | nl -s ') '
         grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
 	    #until [[ $user -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -369,12 +369,12 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
                         #$read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
                 #fi
         #done
-user=$(cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
+user=$(cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | sed -n "${user}"p)
 #tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
 #none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
 domain=$(cat /etc/xray/domain)
-uuid=$(grep "},{" /etc/xray/config.json | cut -b 11-46 | sed -n "$user"p)
-exp=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+uuid=$(grep "},{" /etc/xray/config.json | cut -b 11-46 | sed -n "${user}"p)
+exp=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 3 | sed -n "${user}"p)
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 asu=`cat<<EOF
       {
