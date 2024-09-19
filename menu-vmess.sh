@@ -361,14 +361,14 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
         echo " User          Expired  " 
         #grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | nl -s ') '
         grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-	until [[ $user -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
-                if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+	    #until [[ $user -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
+                #if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
         echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
                         read -rp "Select one client [1]: " CLIENT_NUMBER
-                else
-                        read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
-                fi
-        done
+                #else
+                        #read -rp "Select one client [1-${NUMBER_OF_CLIENTS}]: " CLIENT_NUMBER
+                #fi
+        #done
 user=$(cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
 #tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
 #none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
