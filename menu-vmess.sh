@@ -358,7 +358,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
         echo " Select the existing client to view the config"
         echo " Press CTRL+C to return"
 		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-        echo "     No  User   Expired"
+        echo "  User       Expired  " 
         #grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | nl -s ') '
         grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
 	    until [[ ${CLIENT_NUMBER} -ge 1 && ${CLIENT_NUMBER} -le ${NUMBER_OF_CLIENTS} ]]; do
@@ -441,7 +441,7 @@ echo -e "id            : ${uuid}"
 echo -e "alterId       : 0" 
 echo -e "Security      : auto" 
 echo -e "Network       : ws" 
-echo -e "Path           : /servlets/mms"
+echo -e "Path          : /servlets/mms"
 #echo -e "Path          : /worryfree" 
 #echo -e "Path          : http://bug/worryfree" 
 #echo -e "Path          : /kuota-habis" 
