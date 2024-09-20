@@ -60,8 +60,6 @@ touch /var/log/xray/error2.log
 # / / Ambil Xray Core Version Terbaru
 bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version 1.8.16
 
-
-
 ## crt xray
 systemctl stop nginx
 mkdir /root/.acme.sh
