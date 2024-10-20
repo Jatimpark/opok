@@ -47,6 +47,8 @@ read -p "Expired (days): " masaaktif
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmess$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#vmess1$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 asu=`cat<<EOF
@@ -58,7 +60,7 @@ asu=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "tls"
@@ -73,7 +75,7 @@ ask=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "none"
@@ -117,8 +119,8 @@ echo -e "id            : ${uuid}"
 echo -e "alterId       : 0" 
 echo -e "Security      : auto" 
 echo -e "Network       : ws" 
+echo -e "Path          : /vmess" 
 echo -e "Path          : /servlets/mms" 
-#echo -e "Path          : /worryfree" 
 #echo -e "Path          : http://bug/worryfree" 
 #echo -e "Path          : /kuota-habis" 
 echo -e "ServiceName   : vmess-grpc" 
@@ -149,6 +151,8 @@ masaaktif=1
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmess$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
+sed -i '/#vmess1$/a\### '"$user $exp"'\
+},{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
@@ -161,7 +165,7 @@ asu=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "tls"
@@ -176,7 +180,7 @@ ask=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "none"
@@ -219,8 +223,8 @@ echo -e "id             : ${uuid}"
 echo -e "alterId        : 0"
 echo -e "Security       : auto"
 echo -e "Network        : ws"
-echo -e "Path           : /servlets/mms"
-#echo -e "Path           : /worryfree" 
+echo -e "Path           : /vmess"
+echo -e "Path           : /servlets/mms" 
 #echo -e "Path           : http://bug/worryfree" 
 #echo -e "Path           : /kuota-habis" 
 echo -e "ServiceName    : vmess-grpc"
@@ -239,6 +243,7 @@ read -n 1 -s -r -p "Press any key to back on menu"
     menu-vmess
     
 }
+
 function renewws(){
 clear
 NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
@@ -338,6 +343,7 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
     menu
     fi
 }
+
 function user-ws(){
 clear
 #MYIP=$(wget -qO- ipv4.icanhazip.com);
@@ -384,7 +390,7 @@ asu=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "tls"
@@ -399,7 +405,7 @@ ask=`cat<<EOF
       "id": "${uuid}",
       "aid": "0",
       "net": "ws",
-      "path": "/servlets/mms",
+      "path": "/vmess",
       "type": "none",
       "host": "${domain}",
       "tls": "none"
@@ -440,7 +446,7 @@ echo -e "id            : ${uuid}"
 echo -e "alterId       : 0" 
 echo -e "Security      : auto" 
 echo -e "Network       : ws" 
-echo -e "Path          : /servlets/mms"
+echo -e "Path          : /vmess" 
 #echo -e "Path          : /worryfree" 
 #echo -e "Path          : http://bug/worryfree" 
 #echo -e "Path          : /kuota-habis" 
@@ -460,6 +466,7 @@ echo -e ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu-vmess
 }
+
 clear
 echo -e "${PURPLE}┌─────────────────────────────────────────────────┐${NC}"
 echo -e "${PURPLE}│\E[42;1;37m                    VMESS MENU                   ${PURPLE}│$NC"
