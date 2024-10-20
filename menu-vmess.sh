@@ -18,8 +18,6 @@ else
 domain=$IP
 fi
 
-#tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
-#none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
 until [[ $user =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 echo -e "\033[0;34m┌─────────────────────────────────────────────────┐\033[0m"
 echo -e "\033[0;34m│\E[42;1;37m           Create Xray/Vmess Account            \033[0;34m│"
@@ -47,8 +45,6 @@ read -p "Expired (days): " masaaktif
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmess$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
-# sed -i '/#vmess1$/a\### '"$user $exp"'\
-# },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 asu=`cat<<EOF
@@ -121,8 +117,6 @@ echo -e "Security      : auto"
 echo -e "Network       : ws" 
 echo -e "Path          : /vmess" 
 echo -e "Path          : /servlets/mms" 
-#echo -e "Path          : http://bug/worryfree" 
-#echo -e "Path          : /kuota-habis" 
 echo -e "ServiceName   : vmess-grpc" 
 echo -e "\033[0;34m════════════════════════════════${NC}" 
 echo -e "Link TLS : "
@@ -151,8 +145,6 @@ masaaktif=1
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmess$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
-# sed -i '/#vmess1$/a\### '"$user $exp"'\
-# },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 sed -i '/#vmessgrpc$/a\### '"$user $exp"'\
 },{"id": "'""$uuid""'","alterId": '"0"',"email": "'""$user""'"' /etc/xray/config.json
@@ -225,8 +217,6 @@ echo -e "Security       : auto"
 echo -e "Network        : ws"
 echo -e "Path           : /vmess"
 echo -e "Path           : /servlets/mms" 
-#echo -e "Path           : http://bug/worryfree" 
-#echo -e "Path           : /kuota-habis" 
 echo -e "ServiceName    : vmess-grpc"
 echo -e "\033[0;34m════════════════════════════════════\033[0m"
 echo -e "Link TLS       : ${vmesslink1}"
@@ -375,8 +365,6 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^### " "/etc/xray/config.json")
                 fi
         done
 user=$(cat /etc/xray/config.json | grep '^###' | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
-#tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
-#none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
 domain=$(cat /etc/xray/domain)
 uuid=$(grep "},{" /etc/xray/config.json | cut -b 11-46 | sed -n "${CLIENT_NUMBER}"p)
 exp=$(grep -E "^### " "/etc/xray/config.json" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
@@ -447,9 +435,7 @@ echo -e "alterId       : 0"
 echo -e "Security      : auto" 
 echo -e "Network       : ws" 
 echo -e "Path          : /vmess" 
-#echo -e "Path          : /worryfree" 
-#echo -e "Path          : http://bug/worryfree" 
-#echo -e "Path          : /kuota-habis" 
+echo -e "Path          : /servlets/mms "
 echo -e "ServiceName   : vmess-grpc" 
 echo -e "\033[0;34m════════════════════════════════${NC}" 
 echo -e "Link TLS : "
